@@ -9,65 +9,84 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <meta charset="utf-8" />
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <title>Draw a Card</title>
   </head>
   <body>
     <div id="react-container"></div>
-      <script type="text/babel">
-
-
+    <script type="text/babel">
       // file: src/App.js
-      class App extends React.Component{
-        constructor(props){
-          super(props)
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
           this.state = {
             hand: [],
             suit: ["❤️", "♦️", "♠️", "♣️"],
-            rank: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-          }
+            rank: [
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "J",
+              "Q",
+              "K",
+              "A",
+            ],
+          };
         }
 
         drawCard = () => {
-          const {hand, suit, rank} = this.state
-          let draw = `${rank[Math.floor(Math.random() * rank.length)]} ${suit[Math.floor(Math.random() * suit.length)]}`
-          if(hand.indexOf(draw) === -1){
-            this.setState({hand: [...hand, draw]})
-          } else if(hand.length !== 52){
-            this.drawCard()
+          const { hand, suit, rank } = this.state;
+          let draw = `${rank[Math.floor(Math.random() * rank.length)]} ${
+            suit[Math.floor(Math.random() * suit.length)]
+          }`;
+          if (hand.indexOf(draw) === -1) {
+            this.setState({ hand: [...hand, draw] });
+          } else if (hand.length !== 52) {
+            this.drawCard();
           } else {
-            alert("All cards have been dealt.")
+            alert("All cards have been dealt.");
           }
-        }
+        };
 
         shuffle = () => {
-          this.setState({hand: []})
-        }
+          this.setState({ hand: [] });
+        };
 
-        render(){
+        render() {
           let handStyles = {
             display: "flex",
             flexDirection: "row",
-            flexWrap: "wrap"
-          }
+            flexWrap: "wrap",
+          };
           let cardStyles = {
             border: "1px solid black",
             width: "70px",
             height: "95px",
             margin: "10px",
-            padding: "10px"
-          }
+            padding: "10px",
+          };
           // No need to change anything ABOVE this line ^
 
-          return(
+          return (
+            <>
               <h1>Draw a Card</h1>
-              <button onClick={}>
-                Click to Draw a Card
-              </button>
-              <button onClick={shuffle}>
+              <button onClick={this.drawCard}>Click to Draw a Card</button>
+              <button onClick={this.shuffle}>
                 Return Cards and Shuffle Deck
               </button>
               <div style={handStyles}>
@@ -76,16 +95,17 @@
                     <div style={cardStyles} key={index}>
                       {card}
                     </div>
-                  )
+                  );
                 })}
               </div>
-          )
+            </>
+          );
         }
       }
 
       // No need to change anything below this line
-      const domContainer = document.querySelector('#react-container')
-      ReactDOM.render(<App />, domContainer)
+      const domContainer = document.querySelector("#react-container");
+      ReactDOM.render(<App />, domContainer);
     </script>
   </body>
 </html>
